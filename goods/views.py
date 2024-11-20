@@ -11,10 +11,12 @@ def catalog(req):
     return render(req, "goods/catalog.html", context)
 
 
-def product(req):
-    context = {
-        "title": "Home - О нас",
-        "content": "О нас",
-        "text_on_page": "Текст о нас , мы классные",
-    }
-    return render(req, "goods/product.html")
+def product(req,product_slug):
+    
+    product=Products.objects.get(slug=product_slug)
+
+    context={
+    "product": product
+}    
+
+    return render(req, "goods/product.html",context)
