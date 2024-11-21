@@ -10,7 +10,7 @@ def catalog(req, category_slug):
         goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
     context = {
         "title": "Home - Каталог",
-        "goods": goods,
+        "goods": goods
     }
     return render(req, "goods/catalog.html", context)
 
