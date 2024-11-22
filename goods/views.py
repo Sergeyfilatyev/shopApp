@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import get_list_or_404, render
 
 from goods.models import Products
@@ -8,10 +9,9 @@ def catalog(req, category_slug):
         goods = Products.objects.all()
     else:
         goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
-    context = {
-        "title": "Home - Каталог",
-        "goods": goods
-    }
+    paginator = Paginator(goods, 3)
+    current_page = paginator.page(3)
+    context = {"title": "Home - Каталог", "goods": current_page}
     return render(req, "goods/catalog.html", context)
 
 
